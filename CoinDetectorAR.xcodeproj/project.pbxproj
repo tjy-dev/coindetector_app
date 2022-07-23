@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A667175287EA0C2004FA988 /* HandPoseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A667174287EA0C2004FA988 /* HandPoseHandler.swift */; };
+		7A667177287EF5E2004FA988 /* HandPoseProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A667176287EF5E2004FA988 /* HandPoseProcessor.swift */; };
 		7A9543C0285AE82100D06D4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9543BF285AE82100D06D4C /* AppDelegate.swift */; };
 		7A9543C2285AE82100D06D4C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9543C1285AE82100D06D4C /* ViewController.swift */; };
 		7A9543C4285AE82100D06D4C /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 7A9543C3285AE82100D06D4C /* Experience.rcproject */; };
@@ -16,12 +18,12 @@
 		7A9543D6285AE82600D06D4C /* CoinDetectorARTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9543D5285AE82600D06D4C /* CoinDetectorARTests.swift */; };
 		7A9543E0285AE82600D06D4C /* CoinDetectorARUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9543DF285AE82600D06D4C /* CoinDetectorARUITests.swift */; };
 		7A9543E2285AE82600D06D4C /* CoinDetectorARUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9543E1285AE82600D06D4C /* CoinDetectorARUITestsLaunchTests.swift */; };
-		7A9543EF285AED8300D06D4C /* CoinDetector.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7A9543EE285AED8300D06D4C /* CoinDetector.mlmodel */; };
 		7A9543F1285AF2C800D06D4C /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9543F0285AF2C800D06D4C /* ARView.swift */; };
 		7A9543F3285AF3F300D06D4C /* CoreMLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9543F2285AF3F300D06D4C /* CoreMLHandler.swift */; };
 		7A9543F5285B275700D06D4C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9543F4285B275700D06D4C /* Extension.swift */; };
 		7A9543F7285B4E0600D06D4C /* PencilKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9543F6285B4E0600D06D4C /* PencilKitView.swift */; };
 		7A9543F9285B51E500D06D4C /* MNISTClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7A9543F8285B51E400D06D4C /* MNISTClassifier.mlmodel */; };
+		7ADBF730287ADD2D0075AB67 /* CoinDetector.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7ADBF72F287ADD2D0075AB67 /* CoinDetector.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7A667174287EA0C2004FA988 /* HandPoseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandPoseHandler.swift; sourceTree = "<group>"; };
+		7A667176287EF5E2004FA988 /* HandPoseProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandPoseProcessor.swift; sourceTree = "<group>"; };
 		7A9543BC285AE82100D06D4C /* CoinDetectorAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinDetectorAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9543BF285AE82100D06D4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A9543C1285AE82100D06D4C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,12 +58,12 @@
 		7A9543DB285AE82600D06D4C /* CoinDetectorARUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoinDetectorARUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9543DF285AE82600D06D4C /* CoinDetectorARUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetectorARUITests.swift; sourceTree = "<group>"; };
 		7A9543E1285AE82600D06D4C /* CoinDetectorARUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetectorARUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		7A9543EE285AED8300D06D4C /* CoinDetector.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = CoinDetector.mlmodel; path = ../../CoinDetector.mlmodel; sourceTree = "<group>"; };
 		7A9543F0285AF2C800D06D4C /* ARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
 		7A9543F2285AF3F300D06D4C /* CoreMLHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMLHandler.swift; sourceTree = "<group>"; };
 		7A9543F4285B275700D06D4C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		7A9543F6285B4E0600D06D4C /* PencilKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilKitView.swift; sourceTree = "<group>"; };
 		7A9543F8285B51E400D06D4C /* MNISTClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MNISTClassifier.mlmodel; sourceTree = "<group>"; };
+		7ADBF72F287ADD2D0075AB67 /* CoinDetector.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = CoinDetector.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,12 +118,14 @@
 				7A9543C1285AE82100D06D4C /* ViewController.swift */,
 				7A9543F0285AF2C800D06D4C /* ARView.swift */,
 				7A9543F6285B4E0600D06D4C /* PencilKitView.swift */,
+				7A667174287EA0C2004FA988 /* HandPoseHandler.swift */,
+				7A667176287EF5E2004FA988 /* HandPoseProcessor.swift */,
 				7A9543F2285AF3F300D06D4C /* CoreMLHandler.swift */,
 				7A9543F4285B275700D06D4C /* Extension.swift */,
 				7A9543C3285AE82100D06D4C /* Experience.rcproject */,
 				7A9543C5285AE82100D06D4C /* Main.storyboard */,
 				7A9543F8285B51E400D06D4C /* MNISTClassifier.mlmodel */,
-				7A9543EE285AED8300D06D4C /* CoinDetector.mlmodel */,
+				7ADBF72F287ADD2D0075AB67 /* CoinDetector.mlmodel */,
 				7A9543C8285AE82500D06D4C /* Assets.xcassets */,
 				7A9543CA285AE82500D06D4C /* LaunchScreen.storyboard */,
 			);
@@ -276,11 +282,13 @@
 			files = (
 				7A9543F1285AF2C800D06D4C /* ARView.swift in Sources */,
 				7A9543C2285AE82100D06D4C /* ViewController.swift in Sources */,
+				7A667175287EA0C2004FA988 /* HandPoseHandler.swift in Sources */,
+				7A667177287EF5E2004FA988 /* HandPoseProcessor.swift in Sources */,
 				7A9543F5285B275700D06D4C /* Extension.swift in Sources */,
 				7A9543F3285AF3F300D06D4C /* CoreMLHandler.swift in Sources */,
 				7A9543F7285B4E0600D06D4C /* PencilKitView.swift in Sources */,
+				7ADBF730287ADD2D0075AB67 /* CoinDetector.mlmodel in Sources */,
 				7A9543C0285AE82100D06D4C /* AppDelegate.swift in Sources */,
-				7A9543EF285AED8300D06D4C /* CoinDetector.mlmodel in Sources */,
 				7A9543C4285AE82100D06D4C /* Experience.rcproject in Sources */,
 				7A9543F9285B51E500D06D4C /* MNISTClassifier.mlmodel in Sources */,
 			);

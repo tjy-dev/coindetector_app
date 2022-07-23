@@ -14,48 +14,39 @@ import ARKit
 
 class ViewController: UIViewController {
     
+    // MARK: ARView
     /// Main AR View
     @IBOutlet var arView: ARView!
-    
-    /// PencilKit Canvas
-    let canvasContainer = UIView()
-    
-    let canvasView = PKCanvasView()
-    
-    let pencilButton = UIButton()
-    
-    let cancelButton = UIButton()
-    
-    let clearButton = UIButton()
-    
-    @objc let submitButton = UIButton()
-    
-    /// Predictions of the CoinDetector
-    var predictions = [Int]()
-    
-    /// Prediction bounds
-    var predictionBounds = [CGRect]()
-    
-    /// The number of storing elements of prediction
-    let keepLast = 15
-    
-    /// CanvasView input
-    var didEnterInput = false
-    
     /// Root layer which is the layer of the arView
     var rootLayer: CALayer!
-    
     /// Overlay view for the bounding boxes
     var detectionOverlay: CALayer! = nil
 
-    /// Whether the current frame should be skipped (in terms of model predictions)
+    // MARK: PK Canvas
+    let canvasContainer = UIView()
+    let canvasView = PKCanvasView()
+    let pencilButton = UIButton()
+    let cancelButton = UIButton()
+    let clearButton = UIButton()
+    @objc let submitButton = UIButton()
+    /// CanvasView input
+    var didEnterInput = false
+    
+    // MARK: Coin Detector
+    /// Predictions of the CoinDetector
+    var predictions = [Int]()
+    /// Prediction bounds of the detected objects
+    var predictionBounds = [CGRect]()
+    /// The number of storing elements of prediction
+    let keepLast = 15
+    /// Whether the current frame should be skipped (in terms of model predictions), used globally
     var shouldSkipFrame = 0
     /// How often (in terms of camera frames) should the app run predictions
-#if DEBUG
-    let predictEvery = 12
-#else
-    let predictEvery = 2
-#endif
+    #if DEBUG
+    let predictEvery = 6
+    #else
+    let predictEvery = 1
+    #endif
     /// Concurrent queue to be used for model predictions
     let predictionQueue = DispatchQueue(label: "predictionQueue",
                                         qos: .userInitiated,
@@ -66,6 +57,10 @@ class ViewController: UIViewController {
     /// The last known image orientation
     /// When the image orientation changes, the buffer size used for rendering boxes needs to be adjusted
     var lastOrientation: CGImagePropertyOrientation = .right
+    
+    // MARK: Hand Pose
+    var handPoseProcessor = HandPoseProcessor()
+    var movingObject: Entity? = nil
 
     /// Size of the camera image buffer (used for overlaying boxes)
     var bufferSize: CGSize! {
@@ -83,7 +78,8 @@ class ViewController: UIViewController {
     
     // Vision request tasks
     var requests = [VNRequest]()
-        
+    // var handPoseRequests = [VNDetectHumanHandPoseRequest]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -134,7 +130,19 @@ class ViewController: UIViewController {
         // see https://developer.apple.com/documentation/vision/vnimagecropandscaleoption for more information
         coinDetectionRequest.imageCropAndScaleOption = .scaleFill
         
-        self.requests = [coinDetectionRequest]
+        let handPoseRequest = VNDetectHumanHandPoseRequest() { [weak self] request, error in
+            if let results = request.results {
+                self?.handPoseRequestHandler(results)
+            }
+        }
+        
+        handPoseProcessor.didChangeState = { [weak self] state in
+            self?.didChangeState(state: state)
+        }
+        
+        self.requests = [coinDetectionRequest, handPoseRequest]
+        
+
     }
     
     func setupLayers() {

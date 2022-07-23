@@ -157,6 +157,17 @@ extension UIView {
     }
 }
 
+extension CGPoint {
+
+    static func midPoint(p1: CGPoint, p2: CGPoint) -> CGPoint {
+        return CGPoint(x: (p1.x + p2.x) / 2, y: (p1.y + p2.y) / 2)
+    }
+    
+    func distance(from point: CGPoint) -> CGFloat {
+        return hypot(point.x - x, point.y - y)
+    }
+}
+
 extension Scene {
     // Add an anchor and remove it from the scene after the specified number of seconds.
 /// - Tag: AddAnchorExtension
@@ -174,12 +185,15 @@ extension Scene {
         model.physicsBody?.mode = .kinematic
         
         addAnchor(anchor)
-        // Making the physics body dynamic at this time will let the model be affected by forces.
-        Timer.scheduledTimer(withTimeInterval: seconds, repeats: false) { (timer) in
-            model.physicsBody?.mode = .dynamic
-        }
-        Timer.scheduledTimer(withTimeInterval: seconds + 3, repeats: false) { (timer) in
-            self.removeAnchor(anchor)
+        
+        if seconds != 0 {
+            // Making the physics body dynamic at this time will let the model be affected by forces.
+            Timer.scheduledTimer(withTimeInterval: seconds, repeats: false) { (timer) in
+                model.physicsBody?.mode = .dynamic
+            }
+            Timer.scheduledTimer(withTimeInterval: seconds + 3, repeats: false) { (timer) in
+                self.removeAnchor(anchor)
+            }
         }
     }
 }

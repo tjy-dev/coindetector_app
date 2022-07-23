@@ -13,9 +13,9 @@ extension ViewController: ARSessionDelegate {
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         
         shouldSkipFrame = (shouldSkipFrame + 1) % predictEvery
-
+        
         if shouldSkipFrame > 0 { return }
-                
+        
         predictionQueue.async {
             /// - Tag: MappingOrientation
             // The frame is always oriented based on the camera sensor,
@@ -63,7 +63,6 @@ extension ViewController: ARSessionDelegate {
 
             // Invoke a VNRequestHandler with that image
             let handler = VNImageRequestHandler(cvPixelBuffer: image, orientation: imageOrientation, options: [:])
-
             do {
                 try handler.perform(self.requests)
             } catch {
@@ -74,17 +73,14 @@ extension ViewController: ARSessionDelegate {
     
     func placeAnswer(_ int: Int) {
         // Load the "Box" scene from the "Experience" Reality File
-        let boxAnchor = try! Experience.loadBox()
+        // let boxAnchor = try! Experience.loadBox()
         
         // Add the box anchor to the scene
         // arView.scene.anchors.append(boxAnchor)
         generateTextObject(String(int))
     }
     
-    func generateTextObject(_ str: String) {
-        
-        // arView.scene.anchors.removeAll()
-        
+    func generateTextObject(_ str: String, to target: ARRaycastResult? = nil) {
         let text = MeshResource.generateText(
             str,
             extrusionDepth: 0.005,
@@ -92,31 +88,81 @@ extension ViewController: ARSessionDelegate {
         )
         
         let color: UIColor = .random
-        
         let shader = SimpleMaterial(color: color, roughness: 4, isMetallic: false)
-        
         let textEntity = ModelEntity(mesh: text, materials: [shader])
+        textEntity.name = str
         
-        var location = arView.center
-        
-        if !predictionBounds.isEmpty {
-            location = CGPoint(x: predictionBounds.first!.minX, y: predictionBounds.first!.minY)
+        if let target = target {
+            let anchor = AnchorEntity(world: target.worldTransform)
+            anchor.addChild(textEntity)
+            arView.scene.addAnchor(anchor, removeAfter: 0)
+        } else {
+            var location = arView.center
+            
+            if !predictionBounds.isEmpty {
+                location = CGPoint(x: predictionBounds.first!.minX, y: predictionBounds.first!.minY)
+            }
+            
+            guard let raycastResult = arView.raycast(from: location, allowing: .estimatedPlane, alignment: .any).first else {
+                return
+            }
+            
+            let anchor = AnchorEntity(world: raycastResult.worldTransform)
+            anchor.addChild(textEntity)
+            arView.scene.addAnchor(anchor, removeAfter: 0)
         }
+    }
+    
+    func processPoint(_ points: (index: CGPoint, thumb: CGPoint)) {
+        let indexPointConverted = points.index
+        let thumbPointConverted = points.thumb
+        handPoseProcessor.processPoints((indexPointConverted, thumbPointConverted))
+        let midPoint = CGPoint.midPoint(p1: indexPointConverted, p2: thumbPointConverted)
+        let hitResults = arView.hitTest(midPoint)
         
-        guard let raycastResult = arView.raycast(from: location, allowing: .estimatedPlane, alignment: .any).first else {
-            return
+        if handPoseProcessor.state == .beginPinch {
+            guard let first = hitResults.first else { return }
+            movingObject = first.entity
+        } else if handPoseProcessor.state == .pinched {
+            if let first = hitResults.first {
+                movingObject = first.entity
+            }
+            guard let obj = movingObject else { return }
+            guard let raycastResult = arView.raycast(from: midPoint, allowing: .estimatedPlane, alignment: .any).first else { return }
+            obj.move(to: raycastResult.worldTransform, relativeTo: nil, duration: 0.3)
+        } else if handPoseProcessor.state == .beginApart {
+            if !hitResults.isEmpty {
+                guard let obj = movingObject else { return }
+                
+                var value = Int(obj.name) ?? 0
+                obj.removeFromParent()
+                
+                for hitResult in hitResults where hitResult.entity != obj {
+                    hitResult.entity.removeFromParent()
+                    value += Int(hitResult.entity.name) ?? 0
+                }
+                
+                guard let raycastResult = arView.raycast(from: midPoint, allowing: .estimatedPlane, alignment: .any).first else {
+                    return
+                }
+                generateTextObject(String(value), to: raycastResult)
+            }
+            movingObject = nil
         }
-        
-        let anchor = AnchorEntity(world: raycastResult.worldTransform)
-        anchor.addChild(textEntity)
-        arView.scene.addAnchor(anchor)
     }
     
     @objc
     func handleTap(_ sender: UITapGestureRecognizer) {
-        
-        print(arView.center)
+        /*
+        let hitResult = arView.hitTest(sender.location(in: arView))
         print(sender.location(in: arView))
+        if let first = hitResult.first {
+            print(first.entity)
+            first.entity.position = SIMD3(x: first.entity.position.x + 0.1,
+                                          y: first.entity.position.y + 0.1,
+                                          z: first.entity.position.z)
+        }
+        
         // 1. Perform a ray cast against the mesh.
         // Note: Ray-cast option ".estimatedPlane" with alignment ".any" also takes the mesh into account.
         let tapLocation = sender.location(in: arView)
@@ -125,8 +171,9 @@ extension ViewController: ARSessionDelegate {
             // 2. Visualize the intersection point of the ray with the real-world surface.
             let resultAnchor = AnchorEntity(world: result.worldTransform)
             resultAnchor.addChild(sphere(radius: 0.01, color: .lightGray))
-            arView.scene.addAnchor(resultAnchor, removeAfter: 3)
+            arView.scene.addAnchor(resultAnchor, removeAfter: 60)
         }
+        */
     }
     
     func sphere(radius: Float, color: UIColor) -> ModelEntity {
@@ -135,4 +182,35 @@ extension ViewController: ARSessionDelegate {
         sphere.position.y = radius
         return sphere
     }
+    
+    /*
+    @objc
+    func handlePan(panGesture: UIPanGestureRecognizer) {
+        var panStartZ: CGFloat
+        // var lastPanLocation:
+        
+        guard let view = view as? SCNView else { return }
+        let location = panGesture.location(in: self.view)
+        switch panGesture.state {
+        case .began:
+            // existing logic from previous approach. Keep this.
+            guard let hitNodeResult = arView.hitTest(location, types: nil).first else { return }
+            
+            panStartZ = CGFloat(view.projectPoint(lastPanLocation!).z)
+            // lastPanLocation is new
+            lastPanLocation = hitNodeResult.worldCoordinates
+        case .changed:
+            // This entire case has been replaced
+            let worldTouchPosition = view.unprojectPoint(SCNVector3(location.x, location.y, panStartZ!))
+            let movementVector = SCNVector3(
+              worldTouchPosition.x - lastPanLocation!.x,
+              worldTouchPosition.y - lastPanLocation!.y,
+              worldTouchPosition.z - lastPanLocation!.z)
+            geometryNode.localTranslate(by: movementVector)
+            self.lastPanLocation = worldTouchPosition
+        default:
+            break
+        }
+    }
+    */
 }
