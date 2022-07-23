@@ -9,14 +9,8 @@ import Foundation
 import UIKit
 import PencilKit
 import Vision
-import SwiftUI
 
-extension ViewController: PKCanvasViewDelegate {
-    
-    @objc func clearCanvas() {
-        canvasView.drawing = PKDrawing()
-        didEnterInput = false
-    }
+extension InputViewController {
     
     func submit() {
         var rects = [CGRect]()
@@ -46,12 +40,7 @@ extension ViewController: PKCanvasViewDelegate {
         }
         
         let answer = obtainFullInput(rects: rects)
-        print(answer)
-        let isCorrect = validateAnswer(answer)
-        submitUiHandler(isCorrect: isCorrect)
-        if isCorrect {
-            placeAnswer(answer)
-        }
+        submitted?(answer)
     }
     
     func obtainFullInput(rects: [CGRect]) -> Int {
@@ -130,13 +119,5 @@ extension ViewController: PKCanvasViewDelegate {
             return nil
         }
         return Int(observations[0].identifier) ?? 0
-    }
-    
-    func validateAnswer(_ input: Int) -> Bool {
-        didEnterInput = true
-        guard let topFrequent = predictions.mostFrequent()?.mostFrequent.last else {
-            return false
-        }
-        return input == topFrequent
     }
 }

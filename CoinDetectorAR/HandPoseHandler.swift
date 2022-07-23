@@ -10,9 +10,6 @@ import CoreML
 import Vision
 import UIKit
 
-
-import RealityKit
-
 extension ViewController {
     func handPoseRequestHandler(_ results: [VNObservation]) {
         for observation in results where observation is VNHumanHandPoseObservation {

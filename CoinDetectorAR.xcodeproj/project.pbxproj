@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A1DAE4F288BA3CC00764992 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1DAE4E288BA3CC00764992 /* InputViewController.swift */; };
 		7A667175287EA0C2004FA988 /* HandPoseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A667174287EA0C2004FA988 /* HandPoseHandler.swift */; };
 		7A667177287EF5E2004FA988 /* HandPoseProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A667176287EF5E2004FA988 /* HandPoseProcessor.swift */; };
 		7A9543C0285AE82100D06D4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9543BF285AE82100D06D4C /* AppDelegate.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7A1DAE4E288BA3CC00764992 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		7A667174287EA0C2004FA988 /* HandPoseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandPoseHandler.swift; sourceTree = "<group>"; };
 		7A667176287EF5E2004FA988 /* HandPoseProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandPoseProcessor.swift; sourceTree = "<group>"; };
 		7A9543BC285AE82100D06D4C /* CoinDetectorAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinDetectorAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +118,7 @@
 			children = (
 				7A9543BF285AE82100D06D4C /* AppDelegate.swift */,
 				7A9543C1285AE82100D06D4C /* ViewController.swift */,
+				7A1DAE4E288BA3CC00764992 /* InputViewController.swift */,
 				7A9543F0285AF2C800D06D4C /* ARView.swift */,
 				7A9543F6285B4E0600D06D4C /* PencilKitView.swift */,
 				7A667174287EA0C2004FA988 /* HandPoseHandler.swift */,
@@ -283,6 +286,7 @@
 				7A9543F1285AF2C800D06D4C /* ARView.swift in Sources */,
 				7A9543C2285AE82100D06D4C /* ViewController.swift in Sources */,
 				7A667175287EA0C2004FA988 /* HandPoseHandler.swift in Sources */,
+				7A1DAE4F288BA3CC00764992 /* InputViewController.swift in Sources */,
 				7A667177287EF5E2004FA988 /* HandPoseProcessor.swift in Sources */,
 				7A9543F5285B275700D06D4C /* Extension.swift in Sources */,
 				7A9543F3285AF3F300D06D4C /* CoreMLHandler.swift in Sources */,

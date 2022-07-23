@@ -84,7 +84,7 @@ extension ViewController: ARSessionDelegate {
         let text = MeshResource.generateText(
             str,
             extrusionDepth: 0.005,
-            font: .systemFont(ofSize: 0.05, weight: .bold)
+            font: .systemFont(ofSize: customFontSize(for: Int(str) ?? 0), weight: .bold)
         )
         
         let color: UIColor = .random
@@ -113,6 +113,10 @@ extension ViewController: ARSessionDelegate {
         }
     }
     
+    func customFontSize(for int: Int) -> Double {
+        return 0.05 + 0.05 * (tanh(Double(int) / 500))
+    }
+    
     func processPoint(_ points: (index: CGPoint, thumb: CGPoint)) {
         let indexPointConverted = points.index
         let thumbPointConverted = points.thumb
@@ -124,12 +128,14 @@ extension ViewController: ARSessionDelegate {
             guard let first = hitResults.first else { return }
             movingObject = first.entity
         } else if handPoseProcessor.state == .pinched {
+            
             if let first = hitResults.first {
                 movingObject = first.entity
             }
             guard let obj = movingObject else { return }
             guard let raycastResult = arView.raycast(from: midPoint, allowing: .estimatedPlane, alignment: .any).first else { return }
             obj.move(to: raycastResult.worldTransform, relativeTo: nil, duration: 0.3)
+            
         } else if handPoseProcessor.state == .beginApart {
             if !hitResults.isEmpty {
                 guard let obj = movingObject else { return }
