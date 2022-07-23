@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7A1DAE4F288BA3CC00764992 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1DAE4E288BA3CC00764992 /* InputViewController.swift */; };
+		7A34C6FE288BDD0A00AF39BD /* CoinDetector600.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 7A34C6FD288BDD0A00AF39BD /* CoinDetector600.mlmodel */; };
 		7A667175287EA0C2004FA988 /* HandPoseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A667174287EA0C2004FA988 /* HandPoseHandler.swift */; };
 		7A667177287EF5E2004FA988 /* HandPoseProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A667176287EF5E2004FA988 /* HandPoseProcessor.swift */; };
 		7A9543C0285AE82100D06D4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9543BF285AE82100D06D4C /* AppDelegate.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		7A1DAE4E288BA3CC00764992 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
+		7A34C6FD288BDD0A00AF39BD /* CoinDetector600.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = CoinDetector600.mlmodel; sourceTree = "<group>"; };
 		7A667174287EA0C2004FA988 /* HandPoseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandPoseHandler.swift; sourceTree = "<group>"; };
 		7A667176287EF5E2004FA988 /* HandPoseProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandPoseProcessor.swift; sourceTree = "<group>"; };
 		7A9543BC285AE82100D06D4C /* CoinDetectorAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinDetectorAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +131,7 @@
 				7A9543C5285AE82100D06D4C /* Main.storyboard */,
 				7A9543F8285B51E400D06D4C /* MNISTClassifier.mlmodel */,
 				7ADBF72F287ADD2D0075AB67 /* CoinDetector.mlmodel */,
+				7A34C6FD288BDD0A00AF39BD /* CoinDetector600.mlmodel */,
 				7A9543C8285AE82500D06D4C /* Assets.xcassets */,
 				7A9543CA285AE82500D06D4C /* LaunchScreen.storyboard */,
 			);
@@ -289,6 +292,7 @@
 				7A1DAE4F288BA3CC00764992 /* InputViewController.swift in Sources */,
 				7A667177287EF5E2004FA988 /* HandPoseProcessor.swift in Sources */,
 				7A9543F5285B275700D06D4C /* Extension.swift in Sources */,
+				7A34C6FE288BDD0A00AF39BD /* CoinDetector600.mlmodel in Sources */,
 				7A9543F3285AF3F300D06D4C /* CoreMLHandler.swift in Sources */,
 				7A9543F7285B4E0600D06D4C /* PencilKitView.swift in Sources */,
 				7ADBF730287ADD2D0075AB67 /* CoinDetector.mlmodel in Sources */,

@@ -77,14 +77,15 @@ extension ViewController: ARSessionDelegate {
         
         // Add the box anchor to the scene
         // arView.scene.anchors.append(boxAnchor)
-        generateTextObject(String(int))
+        generateTextObject(int: int)
     }
     
-    func generateTextObject(_ str: String, to target: ARRaycastResult? = nil) {
+    func generateTextObject(int: Int, to target: ARRaycastResult? = nil) {
+        let str = String(int)
         let text = MeshResource.generateText(
             str,
             extrusionDepth: 0.005,
-            font: .systemFont(ofSize: customFontSize(for: Int(str) ?? 0), weight: .bold)
+            font: .systemFont(ofSize: customFontSize(for: int), weight: .bold)
         )
         
         let color: UIColor = .random
@@ -129,7 +130,7 @@ extension ViewController: ARSessionDelegate {
             movingObject = first.entity
         } else if handPoseProcessor.state == .pinched {
             
-            if let first = hitResults.first {
+            if let first = hitResults.first, movingObject == nil {
                 movingObject = first.entity
             }
             guard let obj = movingObject else { return }
@@ -151,7 +152,19 @@ extension ViewController: ARSessionDelegate {
                 guard let raycastResult = arView.raycast(from: midPoint, allowing: .estimatedPlane, alignment: .any).first else {
                     return
                 }
-                generateTextObject(String(value), to: raycastResult)
+                
+                
+                self.present(arInputCanvas, animated: false)
+                arInputCanvas.submitted = { [self] int in
+                    let isCorrect = int == value
+                    print("value and int")
+                    print(value)
+                    print(int)
+                    arInputCanvas.submitUiHandler(isCorrect: isCorrect)
+                    if isCorrect {
+                        generateTextObject(int: value, to: raycastResult)
+                    }
+                }
             }
             movingObject = nil
         }

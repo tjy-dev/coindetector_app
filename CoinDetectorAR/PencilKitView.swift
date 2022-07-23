@@ -40,6 +40,7 @@ extension InputViewController {
         }
         
         let answer = obtainFullInput(rects: rects)
+        print(answer)
         submitted?(answer)
     }
     

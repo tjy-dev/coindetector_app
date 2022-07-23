@@ -108,7 +108,7 @@ class ViewController: UIViewController {
     func setUpVision() {
         // Load the detection models
         /// - Tag: SetupVisionRequest
-        guard let mlModel = try? CoinDetector(configuration: .init()).model,
+        guard let mlModel = try? CoinDetector600(configuration: .init()).model,
               let detector = try? VNCoreMLModel(for: mlModel) else {
             print("Failed to load detector!")
             return
@@ -162,13 +162,7 @@ class ViewController: UIViewController {
         }
         
         arInputCanvas.modalPresentationStyle = .overCurrentContext
-        arInputCanvas.submitted = { [self] int in
-            let isCorrect = validateAnswer(int)
-            arInputCanvas.submitUiHandler(isCorrect: isCorrect)
-            if isCorrect {
-                placeAnswer(int)
-            }
-        }
+        
         
         view.addSubview(pencilButton)
         pencilButton.backgroundColor = .secondarySystemBackground
