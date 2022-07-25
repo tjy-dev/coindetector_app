@@ -121,14 +121,14 @@ extension ViewController: ARSessionDelegate {
     func processPoint(_ points: (index: CGPoint, thumb: CGPoint)) {
         let indexPointConverted = points.index
         let thumbPointConverted = points.thumb
-        handPoseProcessor.processPoints((indexPointConverted, thumbPointConverted))
+        handPoseState.processPoints((indexPointConverted, thumbPointConverted))
         let midPoint = CGPoint.midPoint(p1: indexPointConverted, p2: thumbPointConverted)
         let hitResults = arView.hitTest(midPoint)
         
-        if handPoseProcessor.state == .beginPinch {
+        if handPoseState.state == .beginPinch {
             guard let first = hitResults.first else { return }
             movingObject = first.entity
-        } else if handPoseProcessor.state == .pinched {
+        } else if handPoseState.state == .pinched {
             
             if let first = hitResults.first, movingObject == nil {
                 movingObject = first.entity
@@ -137,7 +137,7 @@ extension ViewController: ARSessionDelegate {
             guard let raycastResult = arView.raycast(from: midPoint, allowing: .estimatedPlane, alignment: .any).first else { return }
             obj.move(to: raycastResult.worldTransform, relativeTo: nil, duration: 0.3)
             
-        } else if handPoseProcessor.state == .beginApart {
+        } else if handPoseState.state == .beginApart {
             if !hitResults.isEmpty {
                 guard let obj = movingObject else { return }
                 
@@ -152,7 +152,6 @@ extension ViewController: ARSessionDelegate {
                 guard let raycastResult = arView.raycast(from: midPoint, allowing: .estimatedPlane, alignment: .any).first else {
                     return
                 }
-                
                 
                 self.present(arInputCanvas, animated: false)
                 arInputCanvas.submitted = { [self] int in

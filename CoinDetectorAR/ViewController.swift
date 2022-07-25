@@ -42,7 +42,7 @@ class ViewController: UIViewController {
     #if DEBUG
     let predictEvery = 6
     #else
-    let predictEvery = 1
+    let predictEvery = 6
     #endif
     /// Concurrent queue to be used for model predictions
     let predictionQueue = DispatchQueue(label: "predictionQueue",
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
     var lastOrientation: CGImagePropertyOrientation = .right
     
     // MARK: Hand Pose
-    var handPoseProcessor = HandPoseProcessor()
+    var handPoseState = HandPoseState()
     var movingObject: Entity? = nil
 
     /// Size of the camera image buffer (used for overlaying boxes)
@@ -86,9 +86,11 @@ class ViewController: UIViewController {
         
         // Show statistics
         // arView.inputView.showStatistics
+        #if DEBUG
         arView.debugOptions.insert(.showStatistics)
         // arView.debugOptions.insert(.showWorldOrigin)
         arView.debugOptions.insert(.showSceneUnderstanding)
+        #endif
         
         rootLayer = arView.layer
         
@@ -132,7 +134,7 @@ class ViewController: UIViewController {
             }
         }
         
-        handPoseProcessor.didChangeState = { [weak self] state in
+        handPoseState.didChangeState = { [weak self] state in
             self?.didChangeState(state: state)
         }
         

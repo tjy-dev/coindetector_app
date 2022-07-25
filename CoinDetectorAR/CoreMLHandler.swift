@@ -66,8 +66,10 @@ extension ViewController {
             
             let textLayer = self.createTextSubLayerInBounds(objectBounds, coinType: coin, confidence: topLabelObservation.confidence)
             
+            #if DEBUG
             shapeLayer.addSublayer(textLayer)
             detectionOverlay.addSublayer(shapeLayer)
+            #endif
         }
         
         self.updateLayerGeometry()

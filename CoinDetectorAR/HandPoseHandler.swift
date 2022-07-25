@@ -64,7 +64,7 @@ extension ViewController {
         }
     }
     
-    func didChangeState(state: HandPoseProcessor.State) {
+    func didChangeState(state: HandPoseState.State) {
         
     }
 }
