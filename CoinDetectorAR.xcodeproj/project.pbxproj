@@ -14,7 +14,6 @@
 		7A667177287EF5E2004FA988 /* HandPoseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A667176287EF5E2004FA988 /* HandPoseState.swift */; };
 		7A9543C0285AE82100D06D4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9543BF285AE82100D06D4C /* AppDelegate.swift */; };
 		7A9543C2285AE82100D06D4C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9543C1285AE82100D06D4C /* ViewController.swift */; };
-		7A9543C4285AE82100D06D4C /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 7A9543C3285AE82100D06D4C /* Experience.rcproject */; };
 		7A9543C7285AE82100D06D4C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A9543C5285AE82100D06D4C /* Main.storyboard */; };
 		7A9543C9285AE82500D06D4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A9543C8285AE82500D06D4C /* Assets.xcassets */; };
 		7A9543CC285AE82500D06D4C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A9543CA285AE82500D06D4C /* LaunchScreen.storyboard */; };
@@ -55,7 +54,6 @@
 		7A9543BC285AE82100D06D4C /* CoinDetectorAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinDetectorAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9543BF285AE82100D06D4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A9543C1285AE82100D06D4C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7A9543C3285AE82100D06D4C /* Experience.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Experience.rcproject; sourceTree = "<group>"; };
 		7A9543C6285AE82100D06D4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7A9543C8285AE82500D06D4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A9543CB285AE82500D06D4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 				7A667176287EF5E2004FA988 /* HandPoseState.swift */,
 				7A9543F2285AF3F300D06D4C /* CoreMLHandler.swift */,
 				7A9543F4285B275700D06D4C /* Extension.swift */,
-				7A9543C3285AE82100D06D4C /* Experience.rcproject */,
 				7A9543C5285AE82100D06D4C /* Main.storyboard */,
 				7A9543F8285B51E400D06D4C /* MNISTClassifier.mlmodel */,
 				7ADBF72F287ADD2D0075AB67 /* CoinDetector.mlmodel */,
@@ -301,7 +298,6 @@
 				7A9543F7285B4E0600D06D4C /* PencilInputHandler.swift in Sources */,
 				7ADBF730287ADD2D0075AB67 /* CoinDetector.mlmodel in Sources */,
 				7A9543C0285AE82100D06D4C /* AppDelegate.swift in Sources */,
-				7A9543C4285AE82100D06D4C /* Experience.rcproject in Sources */,
 				7A9543F9285B51E500D06D4C /* MNISTClassifier.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
